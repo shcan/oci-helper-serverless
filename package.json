@@ -1,0 +1,12 @@
+{
+  "name": "oci-helper-serverless",
+  "private": true,
+  "version": "1.0.0",
+  "description": "OCI Helper Serverless - 一键部署到 Cloudflare",
+  "scripts": {
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.166.0"
+  }
+}

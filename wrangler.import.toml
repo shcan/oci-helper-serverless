@@ -1,0 +1,28 @@
+name = "oci-helper-serverless"
+main = "dist/index.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+
+[assets]
+directory = "web-dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+# 手动导入专用：不声明 D1 —— 请在 Dashboard → 设置 → 绑定 里手动添加
+# D1 数据库，变量名填 DB（大小写一致）。Worker 首次请求会自动建表。
+# 本文件配合部署命令使用：npx wrangler deploy --config wrangler.import.toml
+
+[[durable_objects.bindings]]
+name = "LOG_HUB"
+class_name = "LogHub"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["LogHub"]
+
+[triggers]
+crons = ["* * * * *"]
